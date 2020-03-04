@@ -15,11 +15,10 @@
 </head>
 <body>
 <div class="container-fluid">
-<h1>${weather.productionCenter}</h1>
+<h3><b>Reporting from: </b> ${weather.productionCenter} <b>Latitude:</b> ${weather.location.latitude} <b>Longitude:</b> ${weather.location.longitude} <b>Elevation:</b> ${weather.location.elevation}</h3>
+<h4>${weather.location.areaDescription}</h4>
+
 <h5><a href="/">Search Again</a></h5>
-</div>
-<div class="container-fluid">
-<h1>${weather.productionCenter}</h1>
 </div>
 
 <table class="table">

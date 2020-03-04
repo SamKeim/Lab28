@@ -1,5 +1,7 @@
 package co.grandcircus.Lab28_Weather;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -29,21 +31,27 @@ public class WeatherController {
 			@RequestParam String location,
 			RedirectAttributes redir
 			) {
-		ModelAndView mav = new ModelAndView("index");
-		
-		LocationIQ[] loc = null;
+		List<LocationIQ> loc = null;
 		try {
 			loc = apiServ.findLatLon(location);
 		} catch(RestClientException e) {
 			redir.addFlashAttribute("message", "Location not found");
-			return mav;
+			return new ModelAndView("redirect:/");
 		}
-		
-		Weather weatherInfo = apiServ.findWeather(loc[0].getLat(), loc[0].getLon());
-		mav.addObject("weather", weatherInfo);
-		return mav;
+		return new ModelAndView("index", "locations", loc);
 	}
 	
+	@RequestMapping("/weather")
+	public ModelAndView displayWeather(
+			@RequestParam Double lat,
+			@RequestParam Double lon
+			) {
+		ModelAndView mav = new ModelAndView("weather");
+		Weather weatherInfo = apiServ.findWeather(lat, lon);
+		mav.addObject("weather", weatherInfo);
+		return mav;
+	
+	}
 	
 
 }

@@ -8,6 +8,16 @@ public class Weather {
 	
 	private String productionCenter;
 	
+	private Location location;
+	
+	public Location getLocation() {
+		return location;
+	}
+
+	public void setLocation(Location location) {
+		this.location = location;
+	}
+
 	public Time getTime() {
 		return time;
 	}

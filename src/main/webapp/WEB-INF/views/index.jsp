@@ -14,65 +14,29 @@
 <title>Weather ${weather.productionCenter}</title>
 </head>
 <body>
-	<div class="alert alert-danger" role="alert">
-	<h2>${message}</h2>
+	<div class="container-fluid">
+		<h1>U.S. Weather Search</h1>
+		<h5>Enter a Location</h5>
 	</div>
 	<div class="container-fluid">
 		<form method="post">
-			<label>Location: </label> <input type="text"
-				name="location">
-			<button type="submit">Weather! I hardly know her!</button>
+			<label>Location: </label> <input type="text" name="location">
+			<button type="submit">Weather?! I hardly know her!</button>
 		</form>
-	
 	</div>
-
- <div class="container-fluid">
-<h1>${weather.productionCenter}</h1>
-</div>
-
-<table class="table">
-<tr>
-<c:forEach var="data" items="${weather.data.iconLink}">
-<td>
-<img src="${data}">
-</td>
-</c:forEach>
-</tr>
-<tr>
-<c:forEach var="data" items="${weather.time.startPeriodName}">
-<td>
-${data}
-</td>
-</c:forEach>
-</tr>
-<tr>
-<c:forEach var="data" items="${weather.time.tempLabel}">
-<td>
-${data}
-</td>
-</c:forEach>
-</tr>
-<tr>
-<c:forEach var="data" items="${weather.data.temperature}">
-<td>
-${data}
-</td>
-</c:forEach>
-</tr>
-<tr>
-<c:forEach var="data" items="${weather.data.weather}">
-<td>
-${data}
-</td>
-</c:forEach>
-</tr>
-		<tr>
-<c:forEach var="data" items="${weather.data.text}">
-<td>
-${data}
-</td>
-</c:forEach>
-</tr>
-</table>
+	<c:if test="${message ne null}">
+		<div class="alert alert-danger" role="alert">
+			<h4>${message}</h4>
+		</div>
+	</c:if>
+	<c:if test="${locations ne null}">
+		<h3>Please Select a Location</h3>
+		<h4><i>Results from the nearest weather station will display.</i></h4>
+		<ul>
+			<c:forEach var="location" items="${locations}">
+				<li><a href="/weather?lat=${location.lat}&lon=${location.lon}">${location.displayName}</a></li>
+			</c:forEach>
+		</ul>
+	</c:if>
 </body>
 </html>
